@@ -1,0 +1,28 @@
+services:
+  fastapi:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi_be
+    ports:
+      - "8080:8080"
+    image: fastapi_app
+    environment:
+      - DATABASE_URL=postgresql://metubedb:metubedbpassword@db:5432/metubedb
+    volumes:
+      - ./:/app
+      
+  db:
+    image: postgres:15
+    container_name: metube_db
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: metubedb
+      POSTGRES_PASSWORD: metubedbpassword
+      POSTGRES_DB: metubedb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
