@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import auth
+from routes import auth, upload
 from db.base import Base
 from db.db import engine
 app = FastAPI()
@@ -16,6 +16,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router, prefix="/auth")
+app.include_router(upload.router, prefix="/upload/video")
 
 @app.get('/')
 def slash():

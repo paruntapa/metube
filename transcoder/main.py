@@ -33,8 +33,8 @@ class VideoTranscoder:
         )
         
     def transcode_video(self, input_path, output_dir):
-        process = subprocess.run(
-            cmd = [
+        
+        cmd = [
             "ffmpeg",
             "-i",
             input_path,
@@ -113,13 +113,14 @@ class VideoTranscoder:
             "-f",
             "dash",
             f"{output_dir}/manifest.mpd",
-        ])
+        ]
+        process = subprocess.run(cmd)
 
         if process.returncode != 0:
             print(process.stderr)
             raise Exception(f"Failed to transcode video: {process.stderr}")
 
-    def upload_video(self, prefix: str, local_dir):
+    def upload_files(self, prefix: str, local_dir):
         for root, _, files in os.walk(local_dir):
             for file in files:
                 local_path = os.path.join(root, file)

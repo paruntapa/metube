@@ -37,7 +37,7 @@ def poll_sqs():
                    response = ecs_client.run_task(
                         cluster = "arn:aws:ecs:us-east-1:442042531278:cluster/pahadi-Simba",
                         launchType = "FARGATE",
-                        taskDefinition = "arn:aws:ecs:us-east-1:442042531278:task-definition/video-transcoder:2",
+                        taskDefinition = "arn:aws:ecs:us-east-1:442042531278:task-definition/video-transcoder:3",
                         overrides = {
                              "containerOverrides": [
                                   {"name": "video-transcoder", "environment": [{"name": "S3_BUCKET", "value": bucket_name}, {"name": "S3_KEY", "value": s3_key}]}
@@ -46,13 +46,12 @@ def poll_sqs():
                         networkConfiguration = {
                              "awsvpcConfiguration": {
                                   "subnets": [
-                                       "subnet-00bc7befcf4ee0fa2"
+                                       "subnet-00bc7befcf4ee0fa2",
                                        "subnet-0a0d6e17a47b96d24",
                                        "subnet-0be47a2564c60ea20",
                                        "subnet-06b064343f3a16f20",
                                        "subnet-07904a2c43ff0f479",
                                        "subnet-03acdae4de7b28fc0"
-
                                   ],
                                   "assignPublicIp": "ENABLED",
                                   "securityGroups": [
