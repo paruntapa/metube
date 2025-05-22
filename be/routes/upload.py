@@ -54,11 +54,11 @@ async def get_presigned_thumbnail(user=Depends(get_current_user)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@router.post("/thumbnail")
+@router.post("/metadata")
 def upload_metadata(
     metadata: UploadMetadata,
     user=Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     new_video = Video(
         id=metadata.video_id,
@@ -66,8 +66,9 @@ def upload_metadata(
         description=metadata.description,
         video_s3_key=metadata.video_s3_key,
         visibility=metadata.visibility,
-        user_id=user["sub"]
+        user_id=user["sub"],
     )
+
     db.add(new_video)
     db.commit()
     db.refresh(new_video)

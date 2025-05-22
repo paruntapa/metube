@@ -5,3 +5,5 @@ pydantic_settings
 python-dotenv
 sqlalchemy
 psycopg2-binary
+alembic
+redis

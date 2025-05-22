@@ -152,4 +152,7 @@ class VideoTranscoder:
 
                 shutil.rmtree(output_path)
 
+    def update_video(self):
+        pass
+
 VideoTranscoder().process_video()

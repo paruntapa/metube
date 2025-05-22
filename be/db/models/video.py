@@ -8,18 +8,34 @@ class VideoVisibility(enum.Enum):
     UNLISTED = "UNLISTED"
 
 class ProcessingStatus(enum.Enum):
-    IN_PROCESSING = "IN_PROCESSING"
     COMPLETED = "COMPLETED"
     FAILED = "FAILED"
+    IN_PROGRESS = "IN_PROGRESS"
 
 class Video(Base):
     __tablename__ = "videos"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(TEXT, primary_key=True)
     title = Column(TEXT)
     description = Column(TEXT)
     user_id = Column(TEXT, ForeignKey("users.cognito_sub"))
     video_s3_key = Column(TEXT)
-    visibility = Column(Enum(VideoVisibility), nullable=False, default=VideoVisibility.PRIVATE)
-    is_processing = Column(Enum(ProcessingStatus), nullable=False, default=ProcessingStatus.IN_PROCESSING)
+    visibility = Column(
+        Enum(VideoVisibility),
+        nullable=False,
+        default=VideoVisibility.PRIVATE,
+    )
+    is_processing = Column(
+        Enum(ProcessingStatus),
+        nullable=False,
+        default=ProcessingStatus.IN_PROGRESS,
+    )  
     
+    def to_dict(self):
+        result = {}
+        for c in self.__table__.columns:
+            value = getattr(self, c.name)
+            if isinstance(value, enum.Enum):
+                value = value.value
+            result[c.name] = value
+        return result
