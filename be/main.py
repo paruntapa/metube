@@ -5,7 +5,7 @@ from db.base import Base
 from db.db import engine
 app = FastAPI()
 
-origins = ["https://localhost", "http://localhost:3000"]
+origins = ["*"]  # Allow all origins for development - change this in production
 
 app.add_middleware(
     CORSMiddleware,

@@ -3,6 +3,7 @@ from secrets import Secrets
 import subprocess
 import os
 from pathlib import Path
+import requests
 
 secrets = Secrets()
 
@@ -144,6 +145,7 @@ class VideoTranscoder:
             self.download_video(input_path)
             self.transcode_video(str(input_path), str(output_path))
             self.upload_files(secrets.S3_KEY, str(output_path))
+            self.update_video()
         finally:
             if input_path.exists():
                 input_path.unlink()
@@ -153,6 +155,15 @@ class VideoTranscoder:
                 shutil.rmtree(output_path)
 
     def update_video(self):
-        pass
+        try: 
+            response = requests.put(f"{secrets.BACKEND_URL}/videos?id={secrets.S3_KEY}")
+
+            print(response.json())
+
+            return response.json()
+        except Exception as e:
+            print(e)
+            raise e
+
 
 VideoTranscoder().process_video()

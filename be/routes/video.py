@@ -40,7 +40,7 @@ async def get_videos_info(video_id:str, db: Session = Depends(get_db), user=Depe
     
     return video.to_dict()
 
-@router.post("/")
+@router.put("/")
 def update_video_by_id(id: str, db: Session = Depends(get_db)):
     video = db.query(Video).filter(Video.id == id).first()
 
