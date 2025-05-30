@@ -34,9 +34,9 @@ async def get_presigned_url(user=Depends(get_current_user)):
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.get("/url/thumbnail")
-async def get_presigned_thumbnail(user=Depends(get_current_user)):
+async def get_presigned_thumbnail(thumbnail_id: str,user=Depends(get_current_user)):
     try:
-        thumbnail_id = f"{user['sub']}/{uuid.uuid4()}"
+        thumbnail_id = thumbnail_id.replace('videos/', 'thumbnails/')
         response = s3_client.generate_presigned_url(
             "put_object",
             Params={

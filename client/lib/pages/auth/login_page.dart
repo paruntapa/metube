@@ -56,63 +56,65 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.all(15.0),
             child: Form(
               key: formKey,
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Sign In',  style: TextStyle(
-            fontSize: 50, fontWeight: FontWeight.bold
-          )),
-          SizedBox(height: 15),
-           TextFormField(
-            controller: emailController,
-            decoration: InputDecoration(
-              hintText: 'Email',
-            ),
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Email is required';
-              }
-
-              return null;
-            },
-          ),
-          SizedBox(height: 15),
-           TextFormField(
-            controller: passwordController,
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: 'Password',
-            ),
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Password is required';
-              }
-
-              return null;
-            },
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(onPressed: logIn, child: Text('Sign Up', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-          SizedBox(height: 20),
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(SignupPage.route());
-            },
-            child: RichText(
-              text: TextSpan(
-                text: 'Don\'t have an account? ',
-              style: TextStyle(color: Colors.grey.shade500),
-              
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextSpan(text: 'Sign Up', style: TextStyle(color: Colors.blue))
-              ]
-            )
-          ))
-        ],)
+                Text('Sign In',  style: TextStyle(
+                  fontSize: 50, fontWeight: FontWeight.bold
+                )),
+                SizedBox(height: 15),
+                TextFormField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Email is required';
+                    }
+
+                    return null;
+                  },
+                ),
+                SizedBox(height: 15),
+                TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Password is required';
+                    }
+
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(onPressed: logIn, child: Text('Sign In', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(SignupPage.route());
+                  },
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Don\'t have an account? ',
+                      style: TextStyle(color: Colors.grey.shade500),
+                    
+                      children: [
+                        TextSpan(
+                        text: 'Sign Up', 
+                        style: TextStyle(color: Colors.blue))
+                      ]
+                  )
+                ))
+              ],)
+             ),
+            );
+          },
         ),
       );
-      },
-      ),
-    );
-  }
+    }
 }

@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   http: ^1.4.0
   flutter_bloc: ^9.1.1
+  flutter_secure_storage: ^9.2.4
+  dotted_box: ^0.0.3
+  dotted_border: ^3.0.1
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

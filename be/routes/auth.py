@@ -125,4 +125,4 @@ def refresh_token(refresh_token: str = Cookie(None), user_cognito_sub: str = Coo
     
 @router.get('/me')
 def protected_route(user = Depends(get_current_user)):
-    return {"message": f"You are authorized to access this route {user}"}
+    return user;
